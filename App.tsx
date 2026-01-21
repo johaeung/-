@@ -23,7 +23,7 @@ const App: React.FC = () => {
   const avgReading = YEARLY_DATA.find(d => d.metric === '방과후 독서 30분↑')?.y2024 || 0;
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-slate-200 hidden lg:flex flex-col sticky top-0 h-screen">
         <div className="p-6 border-b border-slate-100">
@@ -37,40 +37,50 @@ const App: React.FC = () => {
             </div>
           </div>
         </div>
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+        
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           <p className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">메인 메뉴</p>
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-50 text-indigo-700 font-semibold transition-all">
             <i className="fa-solid fa-chart-line"></i>
             성과 현황
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all">
-            <i className="fa-solid fa-users-rectangle"></i>
-            지역별 인프라
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all">
-            <i className="fa-solid fa-graduation-cap"></i>
-            연수 운영
-          </button>
           
-          <div className="pt-8">
+          <div className="pt-4">
+            <p className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">관련 서비스</p>
+            <a 
+              href="https://johaeung.github.io/incheon-map-view/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
+            >
+              <i className="fa-solid fa-map-location-dot text-rose-500"></i>
+              <span className="text-sm font-medium">인천 맵 뷰</span>
+              <i className="fa-solid fa-arrow-up-right-from-square text-[10px] ml-auto opacity-40"></i>
+            </a>
+          </div>
+
+          <div className="pt-6">
             <p className="px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">카테고리 필터</p>
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`w-full flex items-center gap-3 px-4 py-2 rounded-xl text-sm transition-all ${
-                  selectedCategory === cat 
-                    ? 'text-indigo-600 font-bold bg-indigo-50' 
-                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
-                }`}
-              >
-                <div className={`w-1.5 h-1.5 rounded-full ${selectedCategory === cat ? 'bg-indigo-600' : 'bg-slate-300'}`}></div>
-                {cat}
-              </button>
-            ))}
+            <div className="space-y-1">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 rounded-xl text-sm transition-all ${
+                    selectedCategory === cat 
+                      ? 'text-indigo-600 font-bold bg-indigo-50' 
+                      : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className={`w-1.5 h-1.5 rounded-full ${selectedCategory === cat ? 'bg-indigo-600' : 'bg-slate-300'}`}></div>
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </nav>
-        <div className="p-4 border-t border-slate-100">
+
+        <div className="p-4 border-t border-slate-100 space-y-2">
           <a 
             href="https://github.com/johaeung" 
             target="_blank" 
@@ -78,10 +88,11 @@ const App: React.FC = () => {
             className="group block bg-slate-900 rounded-2xl p-4 text-white hover:bg-slate-800 transition-colors"
           >
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs text-slate-400">Developer Profile</p>
+              <p className="text-xs text-slate-400 font-medium">Developer Profile</p>
               <i className="fa-brands fa-github text-slate-400 group-hover:text-white transition-colors"></i>
             </div>
-            <p className="text-sm font-medium">johaeung</p>
+            <p className="text-sm font-semibold">johaeung</p>
+            <p className="text-[10px] text-slate-500 mt-1">GitHub @johaeung</p>
           </a>
         </div>
       </aside>
@@ -91,7 +102,7 @@ const App: React.FC = () => {
         <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-slate-900">읽걷쓰_성과대시보드_v1</h1>
-            <p className="text-sm text-slate-500">인천광역시교육청 읽기·걷기·쓰기 통합 성과 분석</p>
+            <p className="text-sm text-slate-500 font-medium">인천광역시교육청 읽기·걷기·쓰기 통합 성과 분석</p>
           </div>
           <div className="flex gap-4">
             <div className="relative">
@@ -102,13 +113,13 @@ const App: React.FC = () => {
                 className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 w-64"
               />
             </div>
-            <button className="p-2 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50">
+            <button className="p-2 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
               <i className="fa-solid fa-bell"></i>
             </button>
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
+        <div className="p-8 space-y-8 max-w-[1600px] mx-auto">
           {/* KPI Stats */}
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <StatCard 
@@ -146,7 +157,7 @@ const App: React.FC = () => {
 
           {/* Main Visualizations */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left: Trend Charts */}
+            {/* Left: Trend Charts & Table */}
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
                 <div className="flex items-center justify-between mb-8">
@@ -184,25 +195,25 @@ const App: React.FC = () => {
                       <tr className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold">
                         <th className="px-6 py-4">카테고리</th>
                         <th className="px-6 py-4">세부 지표</th>
-                        <th className="px-6 py-4">2022</th>
-                        <th className="px-6 py-4">2023</th>
-                        <th className="px-6 py-4">2024</th>
-                        <th className="px-6 py-4">단위</th>
+                        <th className="px-6 py-4 text-center">2022</th>
+                        <th className="px-6 py-4 text-center">2023</th>
+                        <th className="px-6 py-4 text-center">2024</th>
+                        <th className="px-6 py-4 text-center">단위</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {filteredData.map((row, idx) => (
                         <tr key={idx} className="hover:bg-slate-50 transition-colors">
                           <td className="px-6 py-4">
-                            <span className="text-xs px-2 py-1 bg-slate-100 text-slate-600 rounded-lg font-medium">
+                            <span className="text-[10px] px-2 py-1 bg-slate-100 text-slate-600 rounded-lg font-bold uppercase tracking-tight">
                               {row.category}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-sm text-slate-800 font-medium">{row.metric}</td>
-                          <td className="px-6 py-4 text-sm text-slate-500">{row.y2022.toLocaleString()}</td>
-                          <td className="px-6 py-4 text-sm text-slate-500">{row.y2023.toLocaleString()}</td>
-                          <td className="px-6 py-4 text-sm text-slate-900 font-bold">{row.y2024.toLocaleString()}</td>
-                          <td className="px-6 py-4 text-xs text-slate-400">{row.unit}</td>
+                          <td className="px-6 py-4 text-sm text-slate-800 font-semibold">{row.metric}</td>
+                          <td className="px-6 py-4 text-sm text-slate-500 text-center">{row.y2022.toLocaleString()}</td>
+                          <td className="px-6 py-4 text-sm text-slate-500 text-center">{row.y2023.toLocaleString()}</td>
+                          <td className="px-6 py-4 text-sm text-slate-900 font-bold text-center">{row.y2024.toLocaleString()}</td>
+                          <td className="px-6 py-4 text-xs text-slate-400 text-center font-medium">{row.unit}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -217,13 +228,17 @@ const App: React.FC = () => {
               <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold text-slate-800">인프라 현황</h3>
+                  <i className="fa-solid fa-building-columns text-slate-300"></i>
                 </div>
                 <RegionalBarChart data={PROGRAM_STATS_2024.regionalLibrarians} />
               </div>
 
               {/* Training Progress */}
               <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                <h3 className="text-lg font-bold text-slate-800 mb-6">교원 연수 이수율</h3>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold text-slate-800">교원 연수 이수율</h3>
+                  <i className="fa-solid fa-graduation-cap text-slate-300"></i>
+                </div>
                 <div className="space-y-6">
                   {PROGRAM_STATS_2024.training.map((t, idx) => (
                     <div key={idx}>
@@ -246,7 +261,7 @@ const App: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-indigo-600 font-bold uppercase tracking-wide">Excellent</p>
-                    <p className="text-sm text-slate-700 font-medium">교원 저자 연수 이수율 100% 달성</p>
+                    <p className="text-sm text-slate-700 font-semibold leading-tight">교원 저자 연수 이수율 100% 달성</p>
                   </div>
                 </div>
               </div>
